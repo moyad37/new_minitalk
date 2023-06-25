@@ -6,7 +6,7 @@
 /*   By: mmanssou <mmanssou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 17:09:07 by mmanssou          #+#    #+#             */
-/*   Updated: 2023/06/25 17:11:12 by mmanssou         ###   ########.fr       */
+/*   Updated: 2023/06/25 17:12:46 by mmanssou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ int	main(int ac, char **av)
 			return (0);
 		else
 		{
-			handle_av(av[2], atoi(av[1]));
+			handle_av(av[2], ft_atoi(av[1]));
 		}
 	}
 	return (0);
