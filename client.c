@@ -6,7 +6,7 @@
 /*   By: mmanssou <mmanssou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 17:09:07 by mmanssou          #+#    #+#             */
-/*   Updated: 2023/06/25 17:12:46 by mmanssou         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:49:48 by mmanssou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*convert_char_to_binary(char c)
 	binary = malloc(sizeof(char) * 9);
 	if (binary == NULL)
 	{
-		write(1, "memory error\n", 13);
+		write(1, "memor y error\n", 14);
 		exit(1);
 	}
 	while (i >= 0)

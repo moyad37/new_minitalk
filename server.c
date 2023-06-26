@@ -6,7 +6,7 @@
 /*   By: mmanssou <mmanssou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 17:08:58 by mmanssou          #+#    #+#             */
-/*   Updated: 2023/06/25 17:10:58 by mmanssou         ###   ########.fr       */
+/*   Updated: 2023/06/26 14:49:46 by mmanssou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@
 #include <string.h>
 #include <unistd.h>
 
+#define MAX 100000
+
 typedef struct s_save_char
 {
 	int		bin[8];
 	int		c;
 	int		counter;
-	char	*message;
+	char	message[MAX];
 	int		pid;
 	size_t	message_size;
 }			t_save_char;
@@ -78,8 +80,12 @@ void	check_complet(int counter)
 	{
 		g_my.c = convert_bin_to_char(g_my.bin);
 		c = g_my.c;
-		if (g_my.message_size == 0)
-			g_my.message = malloc(sizeof(char));
+		if (g_my.message_size + 1 >= MAX)
+		{
+			write(1, g_my.message, g_my.message_size);
+			g_my.message_size = 0;
+			ft_memset(g_my.message, 0, sizeof(g_my.message));
+		}
 		g_my.message[g_my.message_size] = c;
 		g_my.message_size++;
 		g_my.counter = 0;
@@ -87,8 +93,7 @@ void	check_complet(int counter)
 		{
 			write(1, g_my.message, g_my.message_size);
 			g_my.message_size = 0;
-			free(g_my.message);
-			g_my.message = NULL;
+			ft_memset(g_my.message, 0, sizeof(g_my.message));
 		}
 	}
 }

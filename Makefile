@@ -2,21 +2,36 @@
 FLAGS=-Werror -Wextra -Wall
 SERVER=server
 CLIENT=client
-SRC1=server.c
-SRC2=client.c
+S_SRC=server.c
+C_SRC=client.c
+S_OBJS = $(S_SRC:.c=.o)
+C_OBJS = $(C_SRC:.c=.o)
 INCLUDES=libft/libft.a
 
-all:
-	${MAKE} -C libft/ all
-	cc $(FLAGS) $(SRC1) $(INCLUDES) -o $(SERVER)
-	cc $(FLAGS) $(SRC2) $(INCLUDES) -o $(CLIENT)
+.PHONY: all clean fclean re
+
+all: $(SERVER) $(CLIENT)
+
+%.o: %.c 
+	${MAKE} -C libft all
+	cc $(FLAGS) -c $< -o $@
+
+$(SERVER) : $(S_SRC) $(INCLUDES)
+	cc $(S_SRC) $(INCLUDES) -o $@
+
+$(CLIENT) : $(C_SRC) $(INCLUDES)
+	cc $(C_SRC) $(INCLUDES) -o $@
+
+$(INCLUDES):
+	${MAKE} -C libft
 
 clean:
 	${MAKE} -C libft/ clean
+	rm -f $(S_OBJS) $(C_OBJS)
 	
 fclean: clean
-	/bin/rm -f $(SERVER) $(CLIENT) #$(SERVER_BONUS) #$(CLIENT_BONUS)
-	${MAKE} -C libft/ fclean
+	rm -f $(SERVER) $(CLIENT)
+	${MAKE} -C libft fclean
 
 re: fclean all
 
